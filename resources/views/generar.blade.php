@@ -23,7 +23,7 @@
                     </p>
                 </div>
                 <div class="p-6 pt-0">
-                    <form method="POST" action="/generate">
+                    <form method="POST" action="{{ route('generation.generate') }}">
                         @csrf 
                         <div>
                             <div>
@@ -55,8 +55,5 @@
                 </div>
             </div>
         </div>
-        {{-- @foreach ($errors->all() as $message)
-            {{ $message }}
-        @endforeach --}}
     </div>
 </x-layouts.app>

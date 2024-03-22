@@ -18,10 +18,10 @@
                 </div>
             </div>
             <div class="flex justify-center gap-5  mt-8">
-                <a class="text-sm font-medium text-foreground underline" href="/generar?prompt={{$prompt}}">
+                <a class="text-sm font-medium text-foreground underline" href="{{ route('generation.create', ['prompt' => $prompt])}}">
                     Generate again
                 </a>
-                <a class="text-sm font-medium text-foreground underline" href="/generar">
+                <a class="text-sm font-medium text-foreground underline" href="{{ route('generation.create')}}">
                     Generate other
                 </a>
             </div>
