@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class GenerationController extends Controller
 {
     public function create (Request $request) {
-        return view('generar', [
+        return view('generate', [
             'prompt' => $request->has('prompt') ? $request->prompt : '' 
         ]);
     }
