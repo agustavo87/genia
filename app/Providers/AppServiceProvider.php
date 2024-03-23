@@ -2,10 +2,17 @@
 
 namespace App\Providers;
 
+use App\Actions\GenerateImage;
+use App\Actions\GetimgGenerateImage;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+
+    public $bindings = [
+        GenerateImage::class => GetimgGenerateImage::class,
+    ];
     /**
      * Register any application services.
      */
