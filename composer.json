@@ -1,8 +1,9 @@
 {
-    "name": "laravel/laravel",
+    "name": "agustavo87/genia",
+    "version": "0.1",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "GenIA: Generative 'Inteligencia Artifical' (es)",
+    "keywords": ["ai", "generative"],
     "license": "MIT",
     "require": {
         "php": "^8.2",
@@ -36,6 +37,7 @@
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -M"
         ],
+        "pint": "pint",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
