@@ -1,0 +1,25 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+    scanFiles:
+        - _ide_helper_models.php
+
+    # Level 9 is the highest level
+    level: 9
+
+    noEnvCallsOutsideOfConfig: true
+    
+    editorUrl: 'vscode://file/%%file%%:%%line%%'
+    # editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
+
+#    ignoreErrors:
+#        - '#PHPDoc tag @var#'
+#
+#    excludePaths:
+#        - ./*/*/FileToBeExcluded.php
+#
+#    checkMissingIterableValueType: false

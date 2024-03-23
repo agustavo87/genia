@@ -9,5 +9,8 @@ The Model IDE helper files and dockblocs are automatically generated when `make:
 composer run help-ide
 
 # Run laravel pint style fixes
-composer pint
+composer run pint
+
+# Run PHPStan code analyses
+composer run larastan
 ```
