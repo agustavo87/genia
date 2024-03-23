@@ -2,8 +2,6 @@
 
 namespace Tests\Integration\GenerateImage;
 
-use App\Actions\FakeGenerateImage;
-use App\Actions\GenerateImage;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Tests\Traits\TestsGenerateImage;
@@ -18,7 +16,7 @@ class DefaultGenerateImageTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        if(!config('generate.test.integrate')) {
+        if (! config('generate.test.integrate')) {
             $this->markTestSkipped('Not integrate generative adapters');
         }
         Storage::fake('public');

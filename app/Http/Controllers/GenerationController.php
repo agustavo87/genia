@@ -7,29 +7,33 @@ use Illuminate\Http\Request;
 
 class GenerationController extends Controller
 {
-    public function create (Request $request) {
+    public function create(Request $request)
+    {
         return view('generate', [
-            'prompt' => $request->has('prompt') ? $request->prompt : '' 
+            'prompt' => $request->has('prompt') ? $request->prompt : '',
         ]);
     }
 
-    public function show(Request $request) {
+    public function show(Request $request)
+    {
         $data = $request->validate([
             'id' => 'required|string',
-            'prompt' => 'sometimes|string'
+            'prompt' => 'sometimes|string',
         ]);
-        
+
         return view('show', [
             'img' => "/storage/images/{$data['id']}.png",
-            'prompt' => key_exists('prompt', $data) ? $data['prompt'] : 'Unknow prompt.'
+            'prompt' => array_key_exists('prompt', $data) ? $data['prompt'] : 'Unknow prompt.',
         ]);
     }
 
-    public function generate(Request $request, GenerateImage $generateImage) {
+    public function generate(Request $request, GenerateImage $generateImage)
+    {
         $validated = $request->validate(['prompt' => 'required|string']);
         $prompt = $validated['prompt'];
         $id = uniqid();
         $generateImage->handle($prompt, $id);
+
         return redirect()->route(
             'generation.show',
             [

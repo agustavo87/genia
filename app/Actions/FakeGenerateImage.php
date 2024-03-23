@@ -9,7 +9,7 @@ class FakeGenerateImage implements GenerateImage
 {
     public function handle($prompt, $id): string
     {
-        $path = 'images/' . $id . ".png";
+        $path = 'images/'.$id.'.png';
 
         Storage::disk('public')
             ->put($path, File::get(resource_path('images/fake_img.png')));
