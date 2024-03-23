@@ -8,7 +8,8 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public $bindings = [
+    /** @var string[] */
+    public array $bindings = [
         GenerateImage::class => GetimgGenerateImage::class,
     ];
 

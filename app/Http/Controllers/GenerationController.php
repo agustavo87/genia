@@ -3,18 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Actions\GenerateImage;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class GenerationController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         return view('generate', [
             'prompt' => $request->has('prompt') ? $request->prompt : '',
         ]);
     }
 
-    public function show(Request $request)
+    public function show(Request $request): View
     {
         $data = $request->validate([
             'id' => 'required|string',
@@ -27,7 +29,7 @@ class GenerationController extends Controller
         ]);
     }
 
-    public function generate(Request $request, GenerateImage $generateImage)
+    public function generate(Request $request, GenerateImage $generateImage): RedirectResponse
     {
         $validated = $request->validate(['prompt' => 'required|string']);
         $prompt = $validated['prompt'];

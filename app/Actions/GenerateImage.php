@@ -4,5 +4,5 @@ namespace App\Actions;
 
 interface GenerateImage
 {
-    public function handle($prompt, $id): string;
+    public function handle(string $prompt, string $id): string;
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class GetimgGenerateImage implements GenerateImage
 {
-    public function handle($prompt, $id): string
+    public function handle(string $prompt, string $id): string
     {
         $response = Http::withHeaders([
             'accept' => 'application/json',
@@ -22,7 +22,9 @@ class GetimgGenerateImage implements GenerateImage
             'output_format' => 'png',
         ]);
 
+        /** @var string */
         $base64EncodedImage = $response->json('image');
+        assert(is_string($base64EncodedImage));
 
         $imageData = base64_decode($base64EncodedImage);
 

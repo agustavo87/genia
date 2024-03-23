@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class FakeGenerateImage implements GenerateImage
 {
-    public function handle($prompt, $id): string
+    public function handle(string $prompt, string $id): string
     {
         $path = 'images/'.$id.'.png';
 
