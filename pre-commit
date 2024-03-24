@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo '####### Fixing style...'
+
+./vendor/bin/pint
+
+echo "NOTE: if the code was FIXED please amend it with:"
+echo "'git commit --amend'\n\n"
+
+echo '####### Analyzing code...'
+
+./vendor/bin/phpstan analyse --memory-limit=2G
+
+echo '####### Running tests...'
+
+./vendor/bin/phpunit --testsuite Feature,Unit
