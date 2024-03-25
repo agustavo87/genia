@@ -3,22 +3,26 @@
 namespace App\Providers;
 
 use App\Actions\GenerateImage;
-use App\Actions\GetimgGenerateImage;
+use App\Factories\GenerateImageFactory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /** @var string[] */
-    public array $bindings = [
-        GenerateImage::class => GetimgGenerateImage::class,
-    ];
-
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        //
+        $this->setupGenTxt2ImgAdapter();
+    }
+
+    protected function setupGenTxt2ImgAdapter(): void
+    {
+        $configuredAdapter = config('generate.adapter');
+        assert(is_string($configuredAdapter));
+        $binding = (new GenerateImageFactory)->getBinding($configuredAdapter);
+        $this->app->bind(GenerateImage::class, $binding);
+
     }
 
     /**

@@ -7,11 +7,16 @@ use Illuminate\Support\Facades\Storage;
 
 class GetimgGenerateImage implements GenerateImage
 {
+    public function __construct(
+        public string $key
+    ) {
+    }
+
     public function handle(string $prompt, string $id): string
     {
         $response = Http::withHeaders([
             'accept' => 'application/json',
-            'authorization' => 'Bearer key-4wNUkCO63EBHtxp38tDgLID1MfCh1IZdCyqgU2HQFDX5SPDWGKPkE8IGO6ZSUNx8oG4MHgQlm1Jp9kralQZldhHBfF9DZCnk',
+            'authorization' => 'Bearer '.$this->key,
             'content-type' => 'application/json',
             // 'https://api.getimg.ai/v1/stable-diffusion/text-to-image'
         ])->post('https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image', [

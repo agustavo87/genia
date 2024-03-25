@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Actions\FakeGenerateImage;
 use App\Actions\GenerateImage;
+use App\Factories\GenerateImageFactory;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Tests\Traits\TestsGenerateImage;
@@ -15,7 +15,10 @@ class GenerationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->app->bind(GenerateImage::class, FakeGenerateImage::class);
+        $this->app->bind(
+            GenerateImage::class,
+            GenerateImageFactory::fakeBinding()
+        );
         Storage::fake('public');
     }
 
@@ -26,7 +29,7 @@ class GenerationTest extends TestCase
 
         $response->assertStatus(200)
             ->assertViewIs('generate')
-            ->assertSee(['Imaginator', 'Prompt', 'Generate']);
+            ->assertSee(['GenIA', 'Prompt', 'Generate']);
     }
 
     /** @test */
