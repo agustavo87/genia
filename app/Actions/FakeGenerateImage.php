@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Contracts\GenerateImage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 

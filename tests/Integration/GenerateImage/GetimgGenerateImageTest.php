@@ -2,7 +2,7 @@
 
 namespace Tests\Integration\GenerateImage;
 
-use App\Actions\GenerateImage;
+use App\Contracts\GenerateImage;
 use App\Exceptions\GenerateImageAdapterCouldNotBeResolved;
 use App\Factories\GenerateImageFactory;
 use Illuminate\Support\Facades\Storage;

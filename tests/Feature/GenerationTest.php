@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Actions\GenerateImage;
+use App\Contracts\GenerateImage;
 use App\Factories\GenerateImageFactory;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;

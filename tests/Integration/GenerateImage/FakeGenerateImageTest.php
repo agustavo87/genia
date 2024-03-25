@@ -3,7 +3,7 @@
 namespace Tests\Integration\GenerateImage;
 
 use App\Actions\FakeGenerateImage;
-use App\Actions\GenerateImage;
+use App\Contracts\GenerateImage;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Tests\Traits\TestsGenerateImage;

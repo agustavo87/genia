@@ -2,7 +2,7 @@
 
 namespace Tests\Traits;
 
-use App\Actions\GenerateImage;
+use App\Contracts\GenerateImage;
 use Illuminate\Support\Facades\Storage;
 
 trait TestsGenerateImage
