@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\GenerateImage;
+use App\Factories\GenerateImageDataFactory;
+use App\Factories\SimplePromptImageGeneratorFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class GenerationController extends Controller
 {
-    public function create(Request $request): View
+    public function create(Request $request, SimplePromptImageGeneratorFactory $simplePromptImageGeneratorFactory): View
     {
-        return view('generate', [
-            'prompt' => $request->has('prompt') ? $request->prompt : '',
-        ]);
+        return $simplePromptImageGeneratorFactory->getView();
     }
 
     public function show(Request $request): View
@@ -29,18 +29,16 @@ class GenerationController extends Controller
         ]);
     }
 
-    public function generate(Request $request, GenerateImage $generateImage): RedirectResponse
+    public function generate(Request $request, GenerateImage $generateImage, GenerateImageDataFactory $generateImageDataFactory): RedirectResponse
     {
-        $validated = $request->validate(['prompt' => 'required|string']);
-        $prompt = $validated['prompt'];
-        $id = uniqid();
-        $generateImage->handle($prompt, $id);
+        $generateImageData = $generateImageDataFactory->fromRequest($request);
+        $generateImage->handle($generateImageData);
 
         return redirect()->route(
             'generation.show',
             [
-                'id' => $id,
-                'prompt' => $prompt,
+                'id' => $generateImageData->id,
+                'prompt' => $generateImageData->prompt,
             ]
         );
     }

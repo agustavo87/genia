@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\GenerateImage;
+namespace Tests\Components\GenerateImage;
 
 use App\Actions\FakeGenerateImage;
 use App\Contracts\GenerateImage;

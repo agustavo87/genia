@@ -5,12 +5,19 @@
          colors="true"
 >
     <testsuites>
+        <!-- Components that are independent of Laravel Framework -->
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
+        <!-- Components that are dependent of Laravel Framework-->
+        <testsuite name="Components">
+            <directory>tests/Components</directory>
+        </testsuite>
+        <!-- App features tested with the Laravel Framework -->
         <testsuite name="Feature">
             <directory>tests/Feature</directory>
         </testsuite>
+        <!-- App features or componentes that integrate with external services or the OS-->
         <testsuite name="Integration">
             <directory>tests/Integration</directory>
         </testsuite>

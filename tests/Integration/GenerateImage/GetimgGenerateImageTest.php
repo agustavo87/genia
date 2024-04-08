@@ -3,9 +3,11 @@
 namespace Tests\Integration\GenerateImage;
 
 use App\Contracts\GenerateImage;
+use App\DTOs\GenerateImageData;
 use App\Exceptions\GenerateImageAdapterCouldNotBeResolved;
-use App\Factories\GenerateImageFactory;
-use Illuminate\Support\Facades\Storage;
+use App\Factories\GetimgGenerateImageFactory;
+use Illuminate\Contracts\Foundation\Application;
+use Storage;
 use Tests\TestCase;
 use Tests\Traits\TestsGenerateImage;
 
@@ -24,10 +26,11 @@ class GetimgGenerateImageTest extends TestCase
          */
         $this->app->bind(
             GenerateImage::class,
-            (new GenerateImageFactory)->getBinding('getimg')
+            function (Application $app) {
+                return (new GetimgGenerateImageFactory())->makeFromConfig();
+            }
         );
         Storage::fake('public');
-
     }
 
     /** @test */
@@ -37,6 +40,6 @@ class GetimgGenerateImageTest extends TestCase
         config()->set('generate.adapters.getimg.key', null);
         /** @var GenerateImage */
         $generateImage = $this->app->get(GenerateImage::class);
-        $generateImage->handle('a lion', 'someid1234');
+        $generateImage->handle(new GenerateImageData('a lion', 'someid1234'));
     }
 }

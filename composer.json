@@ -34,6 +34,10 @@
         }
     },
     "scripts": {
+        "shell": [
+            "Composer\\Config::disableProcessTimeout",
+            "docker compose exec -it web bash"
+        ],
         "help-ide": [
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -M"

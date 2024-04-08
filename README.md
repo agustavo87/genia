@@ -2,6 +2,12 @@
 
 ## Development and QA
 
+### Docker Shell
+
+```sh
+composer run shell
+```
+
 ### IDE Helper
 
 You can generate IDE helper files `composer run help-ide`. Also the Model IDE helper files and docblocks are automatically generated when `make:model` artisan command is finished.

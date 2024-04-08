@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Contracts\GenerateImage;
+use App\DTOs\GenerateImageData;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,7 @@ class GetimgGenerateImage implements GenerateImage
     ) {
     }
 
-    public function handle(string $prompt, string $id): string
+    public function handle(GenerateImageData $data): string
     {
         // Some change
         $response = Http::withHeaders([
@@ -23,7 +24,7 @@ class GetimgGenerateImage implements GenerateImage
             // 'https://api.getimg.ai/v1/stable-diffusion/text-to-image'
         ])
             ->post('https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image', [
-                'prompt' => $prompt,
+                'prompt' => $data->prompt,
                 // "model" => icbinp-seco',
                 // dark-sushi-mix-v2-25, synthwave-punk-v2, openjourney-v4, arcane-diffusion, realistic-vision-v5-1,
                 // moonfilm-utopia-v3, mo-di-diffusion, van-gogh-diffusion, stable-diffusion-v2-1, stable-diffusion-xl-v1-0,
@@ -37,7 +38,7 @@ class GetimgGenerateImage implements GenerateImage
 
         $imageData = base64_decode($base64EncodedImage);
 
-        $imagePath = 'images/'.$id.'.png';
+        $imagePath = 'images/'.$data->id.'.png';
 
         Storage::disk('public')->put($imagePath, $imageData);
 

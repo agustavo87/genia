@@ -3,14 +3,15 @@
 namespace App\Actions;
 
 use App\Contracts\GenerateImage;
+use App\DTOs\GenerateImageData;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class FakeGenerateImage implements GenerateImage
 {
-    public function handle(string $prompt, string $id): string
+    public function handle(GenerateImageData $data): string
     {
-        $path = 'images/'.$id.'.png';
+        $path = 'images/'.$data->id.'.png';
 
         Storage::disk('public')
             ->put($path, File::get(resource_path('images/fake_img.png')));

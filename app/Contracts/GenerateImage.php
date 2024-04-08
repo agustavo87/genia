@@ -2,7 +2,9 @@
 
 namespace App\Contracts;
 
+use App\DTOs\GenerateImageData;
+
 interface GenerateImage
 {
-    public function handle(string $prompt, string $id): string;
+    public function handle(GenerateImageData $data): string;
 }

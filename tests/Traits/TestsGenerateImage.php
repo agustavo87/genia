@@ -3,6 +3,7 @@
 namespace Tests\Traits;
 
 use App\Contracts\GenerateImage;
+use App\DTOs\GenerateImageData;
 use Illuminate\Support\Facades\Storage;
 
 trait TestsGenerateImage
@@ -12,7 +13,7 @@ trait TestsGenerateImage
     {
         /** @var GenerateImage */
         $generate = $this->app->get(GenerateImage::class);
-        $path = $generate->handle('a lion', 'someid1234');
+        $path = $generate->handle(new GenerateImageData('a lion', 'someid1234'));
         $this->assertEquals('images/someid1234.png', $path);
         Storage::disk('public')->assertExists($path);
     }
