@@ -5,8 +5,8 @@ namespace App\DTOs;
 class GenerateImageData
 {
     public function __construct(
-        public string $prompt,
-        public string $id,
+        public readonly string $prompt,
+        public readonly string $id,
     ) {
         //
     }

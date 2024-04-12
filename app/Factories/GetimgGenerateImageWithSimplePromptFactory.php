@@ -2,12 +2,12 @@
 
 namespace App\Factories;
 
-use App\Actions\GetimgGenerateImage;
+use App\Actions\GetimgGenerateImageWithSimplePrompt;
 use App\Exceptions\GenerateImageAdapterCouldNotBeResolved;
 
-class GetimgGenerateImageFactory
+class GetimgGenerateImageWithSimplePromptFactory
 {
-    public function makeFromConfig(): GetimgGenerateImage
+    public function makeFromConfig(): GetimgGenerateImageWithSimplePrompt
     {
         $key = config('generate.adapters.getimg.key');
         assert(is_string($key) || is_null($key));
@@ -17,6 +17,6 @@ class GetimgGenerateImageFactory
             );
         }
 
-        return new GetimgGenerateImage($key);
+        return new GetimgGenerateImageWithSimplePrompt($key);
     }
 }

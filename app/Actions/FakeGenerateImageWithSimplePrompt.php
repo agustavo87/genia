@@ -7,7 +7,7 @@ use App\DTOs\GenerateImageData;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class FakeGenerateImage implements GenerateImage
+class FakeGenerateImageWithSimplePrompt implements GenerateImage
 {
     public function handle(GenerateImageData $data): string
     {

@@ -2,23 +2,24 @@
 
 namespace Tests\Feature;
 
-use App\Contracts\GenerateImage;
-use App\Factories\GenerateImageFactory;
+use App\Contracts\ImageGeneratorKit;
+use App\Factories\SimplePromptImageGeneratorKit;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use Tests\Traits\TestsGenerateImage;
 
 class GenerationTest extends TestCase
 {
-    use TestsGenerateImage;
-
     protected function setUp(): void
     {
         parent::setUp();
-        $this->app->bind(
-            GenerateImage::class,
-            GenerateImageFactory::fakeBinding()
-        );
+        $this->app->singleton(ImageGeneratorKit::class, function (Application $app) {
+            return new SimplePromptImageGeneratorKit(
+                $app->make(Request::class),
+                'fake'
+            );
+        });
         Storage::fake('public');
     }
 

@@ -7,7 +7,7 @@ use App\DTOs\GenerateImageData;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
-class GetimgGenerateImage implements GenerateImage
+class GetimgGenerateImageWithSimplePrompt implements GenerateImage
 {
     public function __construct(
         public string $key

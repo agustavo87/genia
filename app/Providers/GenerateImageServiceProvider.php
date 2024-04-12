@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Contracts\GenerateImage;
-use App\Factories\GenerateImageFactory;
+use App\Contracts\ImageGeneratorKit;
+use App\Factories\SimplePromptImageGeneratorKit;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 class GenerateImageServiceProvider extends ServiceProvider
@@ -13,7 +14,14 @@ class GenerateImageServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->setupGenTxt2ImgAdapter();
+        $this->app->singleton(ImageGeneratorKit::class, function (Application $app) {
+            $adapter = config('generate.adapter');
+            assert(is_string($adapter));
+
+            return $app->make(SimplePromptImageGeneratorKit::class, [
+                'adapter' => $adapter,
+            ]);
+        });
     }
 
     /**
@@ -22,13 +30,5 @@ class GenerateImageServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-    }
-
-    protected function setupGenTxt2ImgAdapter(): void
-    {
-        $configuredAdapter = config('generate.adapter');
-        assert(is_string($configuredAdapter));
-        $bindingB = (new GenerateImageFactory)->getBinding($configuredAdapter);
-        $this->app->bind(GenerateImage::class, $bindingB);
     }
 }

@@ -2,37 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\GenerateImage;
-use App\Factories\GenerateImageDataFactory;
-use App\Factories\SimplePromptImageGeneratorFactory;
+use App\Contracts\ImageGeneratorKit;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class GenerationController extends Controller
 {
-    public function create(Request $request, SimplePromptImageGeneratorFactory $simplePromptImageGeneratorFactory): View
+    public function __construct(protected ImageGeneratorKit $kit)
     {
-        return $simplePromptImageGeneratorFactory->getView();
+        //
     }
 
-    public function show(Request $request): View
+    public function create(): View
     {
-        $data = $request->validate([
-            'id' => 'required|string',
-            'prompt' => 'sometimes|string',
-        ]);
-
-        return view('show', [
-            'img' => "/storage/images/{$data['id']}.png",
-            'prompt' => array_key_exists('prompt', $data) ? $data['prompt'] : 'Unknow prompt.',
-        ]);
+        return $this->kit
+            ->getView()
+            ->with($this->kit->getViewData());
     }
 
-    public function generate(Request $request, GenerateImage $generateImage, GenerateImageDataFactory $generateImageDataFactory): RedirectResponse
+    public function show(): View
     {
-        $generateImageData = $generateImageDataFactory->fromRequest($request);
-        $generateImage->handle($generateImageData);
+        return $this->kit
+            ->getShowView()
+            ->with($this->kit->getShowData());
+    }
+
+    public function generate(): RedirectResponse
+    {
+        $generateImageData = $this->kit->getData();
+        $this->kit->getAction()
+            ->handle($generateImageData);
 
         return redirect()->route(
             'generation.show',

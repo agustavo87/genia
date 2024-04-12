@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-use App\DTOs\GenerateImageData;
+use App\DTOs\GenerateImageData as GenerateImageData;
 
 interface GenerateImage
 {

@@ -5,13 +5,12 @@ namespace Tests\Integration\GenerateImage;
 use App\Contracts\GenerateImage;
 use App\DTOs\GenerateImageData;
 use App\Exceptions\GenerateImageAdapterCouldNotBeResolved;
-use App\Factories\GetimgGenerateImageFactory;
-use Illuminate\Contracts\Foundation\Application;
+use App\Factories\GetimgGenerateImageWithSimplePromptFactory;
 use Storage;
 use Tests\TestCase;
 use Tests\Traits\TestsGenerateImage;
 
-class GetimgGenerateImageTest extends TestCase
+class GetimgGenerateImageWithSimplePromptTest extends TestCase
 {
     use TestsGenerateImage;
 
@@ -21,16 +20,12 @@ class GetimgGenerateImageTest extends TestCase
         if (! config('generate.test.integrate')) {
             $this->markTestSkipped('Not integrate generative adapters');
         }
-        /**
-         * WARNING THIS WILL ACTUALLY CALL THE API
-         */
-        $this->app->bind(
-            GenerateImage::class,
-            function (Application $app) {
-                return (new GetimgGenerateImageFactory())->makeFromConfig();
-            }
-        );
         Storage::fake('public');
+    }
+
+    protected function getGenerateImage(): GenerateImage
+    {
+        return (new GetimgGenerateImageWithSimplePromptFactory)->makeFromConfig();
     }
 
     /** @test */
@@ -38,8 +33,7 @@ class GetimgGenerateImageTest extends TestCase
     {
         $this->expectException(GenerateImageAdapterCouldNotBeResolved::class);
         config()->set('generate.adapters.getimg.key', null);
-        /** @var GenerateImage */
-        $generateImage = $this->app->get(GenerateImage::class);
+        $generateImage = $this->getGenerateImage();
         $generateImage->handle(new GenerateImageData('a lion', 'someid1234'));
     }
 }
