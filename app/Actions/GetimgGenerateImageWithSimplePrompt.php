@@ -2,19 +2,19 @@
 
 namespace App\Actions;
 
-use App\Contracts\GenerateImage;
-use App\DTOs\GenerateImageData;
+use App\Contracts\GenerateImageWithSimplePrompt;
+use App\DTOs\GenerateImageWithSimplePromptData;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
-class GetimgGenerateImageWithSimplePrompt implements GenerateImage
+class GetimgGenerateImageWithSimplePrompt implements GenerateImageWithSimplePrompt
 {
     public function __construct(
         public string $key
     ) {
     }
 
-    public function handle(GenerateImageData $data): string
+    public function handle(GenerateImageWithSimplePromptData $data): string
     {
         // Some change
         $response = Http::withHeaders([

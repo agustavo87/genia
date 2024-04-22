@@ -3,15 +3,15 @@
 namespace Tests\Components\GenerateImage;
 
 use App\Actions\FakeGenerateImageWithSimplePrompt;
-use App\Contracts\GenerateImage;
+use App\Contracts\GenerateImageWithSimplePrompt;
 use Tests\TestCase;
-use Tests\Traits\TestsGenerateImage;
+use Tests\Traits\TestsGenerateImageWithSimplePrompt;
 
 class FakeGenerateImageWithSimplePromptTest extends TestCase
 {
-    use TestsGenerateImage;
+    use TestsGenerateImageWithSimplePrompt;
 
-    protected function getGenerateImage(): GenerateImage
+    protected function getGenerateImageWithSimplePromptHandler(): GenerateImageWithSimplePrompt
     {
         return new FakeGenerateImageWithSimplePrompt();
     }

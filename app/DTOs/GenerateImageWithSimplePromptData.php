@@ -2,7 +2,7 @@
 
 namespace App\DTOs;
 
-class GenerateImageData
+class GenerateImageWithSimplePromptData
 {
     public function __construct(
         public readonly string $prompt,

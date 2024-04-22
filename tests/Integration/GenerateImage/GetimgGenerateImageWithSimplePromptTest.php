@@ -2,17 +2,17 @@
 
 namespace Tests\Integration\GenerateImage;
 
-use App\Contracts\GenerateImage;
-use App\DTOs\GenerateImageData;
+use App\Contracts\GenerateImageWithSimplePrompt;
+use App\DTOs\GenerateImageWithSimplePromptData;
 use App\Exceptions\GenerateImageAdapterCouldNotBeResolved;
 use App\Factories\GetimgGenerateImageWithSimplePromptFactory;
 use Storage;
 use Tests\TestCase;
-use Tests\Traits\TestsGenerateImage;
+use Tests\Traits\TestsGenerateImageWithSimplePrompt;
 
 class GetimgGenerateImageWithSimplePromptTest extends TestCase
 {
-    use TestsGenerateImage;
+    use TestsGenerateImageWithSimplePrompt;
 
     protected function setUp(): void
     {
@@ -23,7 +23,7 @@ class GetimgGenerateImageWithSimplePromptTest extends TestCase
         Storage::fake('public');
     }
 
-    protected function getGenerateImage(): GenerateImage
+    protected function getGenerateImageWithSimplePromptHandler(): GenerateImageWithSimplePrompt
     {
         return (new GetimgGenerateImageWithSimplePromptFactory)->makeFromConfig();
     }
@@ -33,7 +33,7 @@ class GetimgGenerateImageWithSimplePromptTest extends TestCase
     {
         $this->expectException(GenerateImageAdapterCouldNotBeResolved::class);
         config()->set('generate.adapters.getimg.key', null);
-        $generateImage = $this->getGenerateImage();
-        $generateImage->handle(new GenerateImageData('a lion', 'someid1234'));
+        $generateImage = $this->getGenerateImageWithSimplePromptHandler();
+        $generateImage->handle(new GenerateImageWithSimplePromptData('a lion', 'someid1234'));
     }
 }

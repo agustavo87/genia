@@ -3,9 +3,9 @@
 namespace App\Factories;
 
 use App\Actions\FakeGenerateImageWithSimplePrompt;
-use App\Contracts\GenerateImage;
+use App\Contracts\GenerateImageWithSimplePrompt;
 use App\Contracts\ImageGeneratorKit;
-use App\DTOs\GenerateImageData;
+use App\DTOs\GenerateImageWithSimplePromptData;
 use App\Exceptions\GenerateImageAdapterCouldNotBeResolved;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class SimplePromptImageGeneratorKit implements ImageGeneratorKit
 {
     protected Request $request;
 
-    protected ?GenerateImage $actionHandler = null;
+    protected ?GenerateImageWithSimplePrompt $actionHandler = null;
 
     /** @var callable */
     protected $getActionAdapter;
@@ -69,7 +69,7 @@ class SimplePromptImageGeneratorKit implements ImageGeneratorKit
         }
     }
 
-    public function getAction(): GenerateImage
+    public function getAction(): GenerateImageWithSimplePrompt
     {
         if (! $this->actionHandler) {
             $this->actionHandler = ($this->getActionAdapter)();
@@ -78,16 +78,16 @@ class SimplePromptImageGeneratorKit implements ImageGeneratorKit
         return $this->actionHandler;
     }
 
-    public function dataFromRequest(Request $request): GenerateImageData
+    public function dataFromRequest(Request $request): GenerateImageWithSimplePromptData
     {
         $validated = $request->validate(['prompt' => 'required|string']);
         $prompt = $validated['prompt'];
         $id = uniqid();
 
-        return new GenerateImageData($prompt, $id);
+        return new GenerateImageWithSimplePromptData($prompt, $id);
     }
 
-    public function getData(): GenerateImageData
+    public function getData(): GenerateImageWithSimplePromptData
     {
         return $this->dataFromRequest($this->request);
     }

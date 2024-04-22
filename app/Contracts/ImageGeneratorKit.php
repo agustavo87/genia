@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-use App\DTOs\GenerateImageData;
+use App\DTOs\GenerateImageWithSimplePromptData;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -18,9 +18,9 @@ interface ImageGeneratorKit
     /** @return array<string, mixed> */
     public function getShowData(): array;
 
-    public function getAction(): GenerateImage;
+    public function getAction(): GenerateImageWithSimplePrompt;
 
-    public function getData(): GenerateImageData;
+    public function getData(): GenerateImageWithSimplePromptData;
 
-    public function dataFromRequest(Request $request): GenerateImageData;
+    public function dataFromRequest(Request $request): GenerateImageWithSimplePromptData;
 }
