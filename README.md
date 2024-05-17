@@ -6,8 +6,6 @@
 git clone https://github.com/agustavo87/genia.git
 ```
 
-### Docker
-
 A docker **development** enviroment with php 8.3 (cli), extensions and composer is included. Can be boot up with
 
 ```sh
