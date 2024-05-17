@@ -2,7 +2,7 @@
 name: 'text2img-geneartor'
 services:
     web:
-        image: 'txt2imgen/web'
+        image: 'php83-cli'
         build: 
             context: './docker'
             args:

@@ -34,14 +34,6 @@
         }
     },
     "scripts": {
-        "up": [
-            "Composer\\Config::disableProcessTimeout",
-            "docker compose up"
-        ],
-        "shell": [
-            "Composer\\Config::disableProcessTimeout",
-            "docker compose exec -it web bash"
-        ],
         "test": "php artisan test --testsuite=Unit,Components,Feature",
         "help-ide": [
             "@php artisan ide-helper:generate",

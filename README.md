@@ -2,10 +2,17 @@
 
 ## Development and QA
 
-### Docker Shell
+### Docker
+A docker **development** enviroment with php 8.3 (cli), extensions and composer is included. Can be boot up with
 
 ```sh
-composer run shell
+docker compse up
+```
+
+In order to enter with a shell inside the development container
+
+```sh
+docker compose exec -it web bash
 ```
 
 ### IDE Helper
