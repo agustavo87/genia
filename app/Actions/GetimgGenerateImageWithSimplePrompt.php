@@ -16,21 +16,32 @@ class GetimgGenerateImageWithSimplePrompt implements GenerateImageWithSimpleProm
 
     public function handle(GenerateImageWithSimplePromptData $data): string
     {
-        // Some change
-        $response = Http::withHeaders([
-            'accept' => 'application/json',
-            'authorization' => 'Bearer '.$this->key,
-            'content-type' => 'application/json',
-            // 'https://api.getimg.ai/v1/stable-diffusion/text-to-image'
-        ])
-            ->post('https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image', [
-                'prompt' => $data->prompt,
-                // "model" => icbinp-seco',
-                // dark-sushi-mix-v2-25, synthwave-punk-v2, openjourney-v4, arcane-diffusion, realistic-vision-v5-1,
-                // moonfilm-utopia-v3, mo-di-diffusion, van-gogh-diffusion, stable-diffusion-v2-1, stable-diffusion-xl-v1-0,
-                'output_format' => 'png',
+        $model = config('generate.adapters.getimg.model');
+
+        if ($model == 'stable-diffusion-xl') {
+            $response = Http::withHeaders([
+                'accept' => 'application/json',
+                'authorization' => 'Bearer '.$this->key,
+                'content-type' => 'application/json',
             ])
-            ->throwUnlessStatus(200);
+                ->post('https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image', [
+                    'prompt' => $data->prompt,
+                    'output_format' => 'png',
+                ])
+                ->throwUnlessStatus(200);
+        } else {
+            $response = Http::withHeaders([
+                'accept' => 'application/json',
+                'authorization' => 'Bearer '.$this->key,
+                'content-type' => 'application/json',
+            ])
+                ->post('https://api.getimg.ai/v1/stable-diffusion/text-to-image', [
+                    'prompt' => $data->prompt,
+                    'model' => $model,
+                    'output_format' => 'png',
+                ])
+                ->throwUnlessStatus(200);
+        }
 
         /** @var string */
         $base64EncodedImage = $response->json('image');

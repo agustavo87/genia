@@ -63,11 +63,15 @@ composer run install-git-hook
 
 # Adapters
 
-The adapters can be configured in `config/generate.php`
+The adapters can be configured in `config/generate.php`. Or with the `GENIA_ADAPTER` enviroment variable.
+
+## Fake
+
+The default adapter is `fake` is meant for development purposes. It just shows the image at `resources/images/fake_img.png`
 
 ## Getimg
 
-You need an account in [Getimg](https://getimg.ai/]). The Getimg adaptar with its API Key can be activated via enviroment variables. For example, modifying the `.env` file.
+You need an account in [Getimg](https://getimg.ai/]). The Getimg adapter with its API Key can be activated via enviroment variables. For example, modifying the `.env` file.
 
 ```
 GENIA_ADAPTER=getimg
@@ -76,9 +80,11 @@ GETIMG_KEY=[your-key-here]
 
 ### Models
 
-Currently the models available are those of [Stable Diffusion](https://stability.ai/). The default model is `stable-diffusion-xl`.
+Currently the models available are those of [Stable Diffusion](https://stability.ai/). There are 29 available `stable-diffusion` models, plus the `stable-diffusion-xl` model, the default if no model is specified. Any of them can be setup with its ID on the `GETIMG_MODEL` enviroment variable.
 
-Also can be used other models of the `stable-diffusion` family. Currently there are 29 available of this models
+```
+GETIMG_MODEL=dark-sushi-mix-v2-25
+````
 
 | ID                              | Name                    | Author                                   |
 |---------------------------------|-------------------------|------------------------------------------|

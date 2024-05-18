@@ -5,6 +5,7 @@ return [
     'adapters' => [
         'getimg' => [
             'key' => env('GETIMG_KEY'),
+            'model' => env('GETIMG_MODEL', 'stable-diffusion-xl'),
         ],
     ],
     'test' => [
