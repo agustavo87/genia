@@ -26,7 +26,7 @@ You can generate IDE helper files
 composer run help-ide
 ```
 
-Also the Model IDE helper files and dockblocks are automatically generated when `make:model` artisan command is finished.
+Also the Model IDE helper files and docblocks are automatically generated when `make:model` artisan command is finished.
 
 ### QA
 
