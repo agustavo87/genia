@@ -12,7 +12,7 @@ A docker **development** enviroment with php 8.3 (cli), extensions and composer 
 docker compose up
 ```
 
-It spin up a development server at `localhost:80`. If the composer dependencies are not installed yet
+It spins up a development server at `localhost:80`. If the composer dependencies are not installed yet
 - installs dependendencies with composer
 - create `.env` file 
 - links storage folders
