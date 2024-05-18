@@ -1,4 +1,4 @@
-# GenIA: Generative "Artificial Intelligence" (es) Image Generator
+# GenIA: Generative "Inteligencia Artificial" (es) Image Generator
 
 ### Install
 
