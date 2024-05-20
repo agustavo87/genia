@@ -123,3 +123,10 @@ The models provided by Getimg can change. To check available models of the `stab
 ```sh
 $ php artisan gen:getimg-models
 ```
+
+### Other parameters
+
+```
+# Number of refinement iterations the model performs to transform random noise into a coherent image.
+GETIMG_STEPS=8
+```

@@ -26,6 +26,7 @@ class GetimgGenerateImageWithSimplePrompt implements GenerateImageWithSimpleProm
             ])
                 ->post('https://api.getimg.ai/v1/stable-diffusion-xl/text-to-image', [
                     'prompt' => $data->prompt,
+                    'steps' => config('generate.adapters.getimg.steps'),
                     'output_format' => 'png',
                 ])
                 ->throwUnlessStatus(200);
@@ -38,6 +39,7 @@ class GetimgGenerateImageWithSimplePrompt implements GenerateImageWithSimpleProm
                 ->post('https://api.getimg.ai/v1/stable-diffusion/text-to-image', [
                     'prompt' => $data->prompt,
                     'model' => $model,
+                    'steps' => config('generate.adapters.getimg.steps'),
                     'output_format' => 'png',
                 ])
                 ->throwUnlessStatus(200);

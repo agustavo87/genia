@@ -6,6 +6,7 @@ return [
         'getimg' => [
             'key' => env('GETIMG_KEY'),
             'model' => env('GETIMG_MODEL', 'stable-diffusion-xl'),
+            'steps' => env('GETIMG_STEPS', 1),
         ],
     ],
     'test' => [
